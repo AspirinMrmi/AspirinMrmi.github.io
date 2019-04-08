@@ -21,4 +21,4 @@ after_success:
   - git push --force "https://AspirinMrmi:${GH_TOKEN}@${GH_REF}" master:master
 env:
   global:
-    - GH_REF: github.com/AspirinMrmi/AspirinMrmi.github.io.git
+    - GH_REF: https://github.com/AspirinMrmi/AspirinMrmi.github.io.git
