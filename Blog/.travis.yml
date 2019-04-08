@@ -10,7 +10,7 @@ install:
 - npm install
 script:
 - hexo clean
-- hexo generate
+- hexo g
 after_success:
   - cd ./public
   - git init
