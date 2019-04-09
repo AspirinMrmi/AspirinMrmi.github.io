@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="Aspirin">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="学习TypeScript(基础篇)-Part.1">
+  <meta property="og:description" content>
+  <meta property="og:site_name" content="我家小韩真漂亮">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="http://yoursite.com">
+  
+    <link rel="alternate" href="/atom.xml" title="我家小韩真漂亮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>我家小韩真漂亮</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">学习TypeScript(基础篇)-Part.1</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Aspirin</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-04-09</span>
+            <span class="time">14:57:35</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/TypeScript/">#TypeScript</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>总有一些东西让人望而生畏，学习这件事情也是一样。究其原因，还是因为懒惰，而造成懒惰的根本原因是对其毫无兴趣。如果觉得一件事情了无生趣，拿我们写代码来讲，最后的结果就是堆砌和stack shit。</p>
+<p>我们总是在后知后觉中学会了成长。</p>
+<p>现在学习于我个人而言，其一，可以给我的工作带来高效的体验以及保持技术的革新；其二，可以给我带来丰厚的劳动报酬；其三，我积累的东西可以分享出去，给更多人以帮助、被更多人认可，这也是我今年想践行的一件事情。</p>
+<p>对于TypeScript的感觉是陌生又熟悉，熟悉是只是听过，却又陌生到对它一无所知。</p>
+<p><strong>这是扫盲笔记加个人的碎碎念！<br>这是扫盲笔记加个人的碎碎念！这是扫盲笔记加个人的碎碎念！</strong></p>
+<p>所以，这一系列的学习笔记适合：</p>
+<ul>
+<li>new learner</li>
+</ul>
+<p>不适合：</p>
+<ul>
+<li>advanved developer（based Ts）</li>
+</ul>
+<p>文章参考：</p>
+<ul>
+<li><a href="https://ts.xcatliu.com/" target="_blank" rel="noopener">https://ts.xcatliu.com/</a></li>
+<li><a href="https://www.typescriptlang.org/index.html" target="_blank" rel="noopener">https://www.typescriptlang.org/index.html</a></li>
+</ul>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="什么是TypeScript"><a href="#什么是TypeScript" class="headerlink" title="什么是TypeScript"></a>什么是TypeScript</h3><p>TypeScript是JavaScript的一个超集，所谓超集就是超级集合的意思。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g1wd52im9hj30k60fuaaj.jpg" alt="image"></p>
+<p>TypeScript（以下简称Ts）主要提供了<strong>类型系统</strong>和<strong>对ES6的支持</strong>。Ts由微软开发，开源于Github上。</p>
+<h3 id="TypeScript的优点"><a href="#TypeScript的优点" class="headerlink" title="TypeScript的优点"></a>TypeScript的优点</h3><ul>
+<li>通过类型系统增强了代码的可读性和可维护性</li>
+<li>Ts是Js的超集，.js文件可以直接重命名为.ts</li>
+<li>即使不显示地定义类型，也能够做出类型推论</li>
+<li>可以定义简单、复杂等类型</li>
+<li>即使Ts编译报错，也可以生成Js文件</li>
+<li>社区活跃</li>
+</ul>
+<h3 id="TypeScript的缺点"><a href="#TypeScript的缺点" class="headerlink" title="TypeScript的缺点"></a>TypeScript的缺点</h3><ul>
+<li>一定的学习成本</li>
+<li>增加开发成本</li>
+<li>集成到构建</li>
+<li>可能和一些库结合的不是很完美</li>
+</ul>
+<h2 id="安装TypeScript"><a href="#安装TypeScript" class="headerlink" title="安装TypeScript"></a>安装TypeScript</h2><p>全局安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i -g typescript</span><br></pre></td></tr></table></figure>
+<p>以上命令会在全局安装tsc命令，安装好以后，我们可以再全局执行tsc命令用来编译一个Ts文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tsc index.js</span><br></pre></td></tr></table></figure>
+<p>Ts文件以.ts为后缀，在React中以.tsx为后缀。</p>
+<h2 id="Hello-TypeScript"><a href="#Hello-TypeScript" class="headerlink" title="Hello TypeScript"></a>Hello TypeScript</h2><p>从一个简单的例子开始，逃不开Hello。</p>
+<p>创建一个hello.ts文件，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function sayHello(person: string) &#123;</span><br><span class="line">    return &apos;Hello, &apos; + person</span><br><span class="line">&#125;</span><br><span class="line">let user = &apos;John&apos;;</span><br><span class="line">console.log(sayHello(user));</span><br></pre></td></tr></table></figure>
+<p>在Ts中，使用 : 指定变量的类型。</p>
+<p>以上的例子中，我们指定参数person的类型为string</p>
+<p>下面我们对这个Ts文件进行编译，打开终端，键入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc hello.ts</span><br></pre></td></tr></table></figure>
+<p>这时候会生成一个hello.js的文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function sayHello(person) &#123;</span><br><span class="line">    return &apos;Hello, &apos; + person;</span><br><span class="line">&#125;</span><br><span class="line">var user = &apos;John&apos;;</span><br><span class="line">console.log(sayHello(user));</span><br></pre></td></tr></table></figure>
+<p>我们使用Ts对参数类型进行了静态的检查，但是编译后的js文件中并没有检查的代码被插入进来。</p>
+<p><strong>Ts只会进行静态检查，如果发现有错误，编译的时候就会报错。</strong></p>
+<p>如果我将ts代码修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function sayHello(person: string) &#123;</span><br><span class="line">    return &apos;Hello, &apos; + person</span><br><span class="line">&#125;</span><br><span class="line">let user = [&apos;a&apos;,&apos;b&apos;];</span><br><span class="line">console.log(sayHello(user));</span><br></pre></td></tr></table></figure>
+<p>编辑器中会提示错误，编译时也会报错，但是，不影响其最终编译为js。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g1wdw3ymc5j30w0078dgo.jpg" alt="image"></p>
+<p>如果要在报错的时候终止js的生成需要进行相关的配置，这个日后再议。</p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><p>例子写完后，编辑器提示 [函数重复实现]和[无法重新声明块范围变量“user”]？</p>
+<ul>
+<li>终端执行  tsc –init 生成一个tsconfig文件即可</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
