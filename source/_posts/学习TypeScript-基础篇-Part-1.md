@@ -1,0 +1,151 @@
+---
+title: 学习TypeScript(基础篇)-Part.1
+date: 2019-04-09 14:56:56
+tags: TypeScript
+categories: Love & Peace
+---
+
+## 前言
+
+总有一些东西让人望而生畏，学习这件事情也是一样。究其原因，还是因为懒惰，而造成懒惰的根本原因是对其毫无兴趣。如果觉得一件事情了无生趣，拿我们写代码来讲，最后的结果就是堆砌和stack shit。
+
+我们总是在后知后觉中学会了成长。
+
+现在学习于我个人而言，其一，可以给我的工作带来高效的体验以及保持技术的革新；其二，可以给我带来丰厚的劳动报酬；其三，我积累的东西可以分享出去，给更多人以帮助、被更多人认可，这也是我今年想践行的一件事情。
+
+对于TypeScript的感觉是陌生又熟悉，熟悉是只是听过，却又陌生到对它一无所知。
+
+**这是扫盲笔记加个人的碎碎念！
+这是扫盲笔记加个人的碎碎念！这是扫盲笔记加个人的碎碎念！**
+
+所以，这一系列的学习笔记适合：
+
+- new learner
+
+不适合：
+
+- advanved developer（based Ts）
+
+
+文章参考：
+
+- https://ts.xcatliu.com/
+- https://www.typescriptlang.org/index.html
+
+
+---
+
+## 简介
+
+### 什么是TypeScript
+
+TypeScript是JavaScript的一个超集，所谓超集就是超级集合的意思。
+
+![image](https://ws4.sinaimg.cn/large/006tNc79ly1g1wd52im9hj30k60fuaaj.jpg)
+
+TypeScript（以下简称Ts）主要提供了**类型系统**和**对ES6的支持**。Ts由微软开发，开源于Github上。
+
+### TypeScript的优点
+
+- 通过类型系统增强了代码的可读性和可维护性
+- Ts是Js的超集，.js文件可以直接重命名为.ts
+- 即使不显示地定义类型，也能够做出类型推论
+- 可以定义简单、复杂等类型
+- 即使Ts编译报错，也可以生成Js文件
+- 社区活跃
+
+### TypeScript的缺点
+
+- 一定的学习成本
+- 增加开发成本
+- 集成到构建
+- 可能和一些库结合的不是很完美
+
+## 安装TypeScript
+
+全局安装：
+
+
+```
+$ npm i -g typescript
+```
+
+以上命令会在全局安装tsc命令，安装好以后，我们可以再全局执行tsc命令用来编译一个Ts文件
+
+
+```
+$ tsc index.js
+```
+
+Ts文件以.ts为后缀，在React中以.tsx为后缀。
+
+## Hello TypeScript
+
+从一个简单的例子开始，逃不开Hello。
+
+创建一个hello.ts文件，代码如下：
+
+
+```
+function sayHello(person: string) {
+    return 'Hello, ' + person
+}
+let user = 'John';
+console.log(sayHello(user));
+```
+
+在Ts中，使用 : 指定变量的类型。
+
+以上的例子中，我们指定参数person的类型为string
+
+下面我们对这个Ts文件进行编译，打开终端，键入：
+
+
+```
+tsc hello.ts
+```
+
+这时候会生成一个hello.js的文件：
+
+
+```
+function sayHello(person) {
+    return 'Hello, ' + person;
+}
+var user = 'John';
+console.log(sayHello(user));
+```
+
+我们使用Ts对参数类型进行了静态的检查，但是编译后的js文件中并没有检查的代码被插入进来。
+
+**Ts只会进行静态检查，如果发现有错误，编译的时候就会报错。**
+
+
+如果我将ts代码修改如下：
+
+
+```
+function sayHello(person: string) {
+    return 'Hello, ' + person
+}
+let user = ['a','b'];
+console.log(sayHello(user));
+```
+编辑器中会提示错误，编译时也会报错，但是，不影响其最终编译为js。
+
+![image](https://ws4.sinaimg.cn/large/006tNc79ly1g1wdw3ymc5j30w0078dgo.jpg)
+
+如果要在报错的时候终止js的生成需要进行相关的配置，这个日后再议。
+
+## FAQ
+
+例子写完后，编辑器提示 [函数重复实现]和[无法重新声明块范围变量“user”]？
+
+- 终端执行  tsc --init 生成一个tsconfig文件即可
+
+
+
+
+
+
+
