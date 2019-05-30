@@ -8,7 +8,7 @@
   <meta name="description" content="npm 是JavaScript 世界的包管理工具，并且是Node.js 平台的默认包管理工具。通过npm 可以安装、共享、分发代码，管理项目依赖关系。">
   <meta name="author" content="Aspirin">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="关于npm的一些零碎知识">
+  <meta property="og:title" content="关于node工具的一些零碎知识">
   <meta property="og:description" content="npm 是JavaScript 世界的包管理工具，并且是Node.js 平台的默认包管理工具。通过npm 可以安装、共享、分发代码，管理项目依赖关系。">
   <meta property="og:site_name" content="我家小韩真漂亮">
   <meta property="og:type" content="article">
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">关于npm的一些零碎知识</p>
+          <p class="title">关于node工具的一些零碎知识</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-04-09</span>
-            <span class="time">20:51:48</span>
+            <span class="time">09:31:19</span>
           </span>
           
           <!--  Categories  -->
@@ -139,9 +139,49 @@
 <p>使用 ==nrm ls== 命令查看当前所有源：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  npm ---- https://registry.npmjs.org/</span><br><span class="line">  cnpm --- http://r.cnpmjs.org/</span><br><span class="line">* taobao - https://registry.npm.taobao.org/</span><br><span class="line">  nj ----- https://registry.nodejitsu.com/</span><br><span class="line">  npmMirror  https://skimdb.npmjs.com/registry/</span><br><span class="line">  edunpm - http://registry.enpmjs.org/</span><br></pre></td></tr></table></figure>
 <p>以上是我的所有镜像源，可以看到我当前所用的正是淘宝的镜像。如果我们想切回npm源：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nrm use npm</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nrm usr npm</span><br></pre></td></tr></table></figure>
 <p>下面是一些常用的命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ nrm ls #列出nrm管理的registry列表</span><br><span class="line">$ nrm current #显示当前的registry名称</span><br><span class="line">$ nrm use taobao #切换registry到taobao源，这个命令对yarn和npm同时生效</span><br><span class="line">$ nrm add taobao https://registry.npm.taobao.org #添加一个名为taobao的源到列表</span><br><span class="line">$ nrm del taobao #从列表中删除taobao源</span><br></pre></td></tr></table></figure>
+<h2 id="NVM-Mac-管理工具"><a href="#NVM-Mac-管理工具" class="headerlink" title="NVM(Mac)管理工具"></a>NVM(Mac)管理工具</h2><p>在安装前建议先将本地的node模块都清空。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm ls -g --depth=0  # 查看已经安装在全局的node模块</span><br><span class="line"></span><br><span class="line">sudo rm -rf /usr/local/lib/node_modules  # 删除全局node_modules</span><br><span class="line"></span><br><span class="line">sudo rm /usr/local/bin/node  #删除node</span><br><span class="line"></span><br><span class="line">cd  /usr/local/bin &amp;&amp; ls -l | grep &quot;../lib/node_modules/&quot; | awk &apos;&#123;print $9&#125;&apos;| xargs rm    #删除全局 node 模块注册的软链</span><br></pre></td></tr></table></figure>
+<p>安装nvm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>安装完成后重新打开终端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>nvm常用的命令：</p>
+<ul>
+<li><p>nvm install <version> ## 安装指定版本，可模糊安装，如：安装v4.4.0，既可nvm install v4.4.0，又可nvm install 4.4</version></p>
+</li>
+<li><p>nvm uninstall <version> ## 删除已安装的指定版本，语法与install类似</version></p>
+</li>
+<li><p>nvm use <version> ## 切换使用指定的版本node</version></p>
+</li>
+<li><p>nvm ls ## 列出所有安装的版本</p>
+</li>
+<li><p>nvm ls-remote ## 列出所有远程服务器的版本（官方node version list）</p>
+</li>
+<li><p>nvm current ## 显示当前的版本</p>
+</li>
+<li><p>nvm alias <name> <version> ## 给不同的版本号添加别名</version></name></p>
+</li>
+<li><p>nvm unalias <name> ## 删除已定义的别名</name></p>
+</li>
+<li><p>nvm reinstall-packages <version> ## 在当前版本node环境下，重新全局安装指定版本号的npm包</version></p>
+</li>
+</ul>
+<h2 id="Mac打开、编辑、保存-bash-profile"><a href="#Mac打开、编辑、保存-bash-profile" class="headerlink" title="Mac打开、编辑、保存.bash_profile"></a>Mac打开、编辑、保存.bash_profile</h2><ol>
+<li><p>根目录创建.bash_profile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch .bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -e .bash_profile</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>保存文件，关闭窗口</li>
+<li>更新刚刚配置的环境变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
 <hr>
 <p>参考：</p>
 <p><a href="http://blog.soolx.top/2019/03/31/npm-publish/" target="_blank" rel="noopener">http://blog.soolx.top/2019/03/31/npm-publish/</a></p>
