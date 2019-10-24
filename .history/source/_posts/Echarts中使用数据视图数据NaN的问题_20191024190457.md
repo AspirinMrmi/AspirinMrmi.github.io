@@ -1,0 +1,124 @@
+---
+title: Echarts中使用数据视图数据NaN的问题
+date: 2019-10-24 19:03:58
+tags: charts
+categories: Love & Peace
+---
+
+最近在工作中遇到一个比较有意思（棘手）的问题
+
+有意思的问题之处不在于其本身有意思而是我在试图百度以及Google的时候并没有找到问题的合理解决方式
+
+简单介绍下问题的背景，其实很简单，就是要将一个Echarts的图表增加一个ToolBox，可以让用户看到数据视图，Echarts本身的API也是有这个功能的，但是奇怪的是，在增加了数据视图之后，并没有看到预期的数据形式。
+
+在搜索解决方式的时候发现也有人在Echarts的官方仓库提了一个issue： https://github.com/apache/incubator-echarts/issues/7533。
+
+拿一个官方示例来看：
+
+```javascript
+option = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+        source: [
+            ['product', '2015', '2016', '2017'],
+            ['Matcha Latte', 43.3, 85.8, 93.7],
+            ['Milk Tea', 83.1, 73.4, 55.1],
+            ['Cheese Cocoa', 86.4, 65.2, 82.5],
+            ['Walnut Brownie', 72.4, 53.9, 39.1]
+        ]
+    },
+    xAxis: {type: 'category'},
+    yAxis: {},
+    // Declare several bar series, each will be mapped
+    // to a column of dataset.source by default.
+    series: [
+        {type: 'bar'},
+        {type: 'bar'},
+        {type: 'bar'}
+    ]
+};
+
+```
+
+这样渲染出的图表如下：
+
+![屏幕快照 2019-10-24 下午4.00.13](https://github.com/Namily/PicOwner/blob/master/2019/10/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-10-24%20%E4%B8%8B%E5%8D%884.00.13.png?raw=true)
+
+当我试图要加一个数据视图时：
+
+```javascript
+"toolbox": {
+	"feature": {
+  	"dataView": {}
+ 	}
+}
+```
+
+![屏幕快照 2019-10-24 下午6.39.35](https://github.com/Namily/PicOwner/blob/master/2019/10/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-10-24%20%E4%B8%8B%E5%8D%886.39.35.png?raw=true)
+
+数据视图如上所示
+
+
+
+**解决方案**
+
+调整数据格式：
+
+```javascript
+option = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+        source: [
+            ['product', '2015', '2016', '2017'],
+            ['Matcha Latte', 43.3, 85.8, 93.7],
+            ['Milk Tea', 83.1, 73.4, 55.1],
+            ['Cheese Cocoa', 86.4, 65.2, 82.5],
+            ['Walnut Brownie', 72.4, 53.9, 39.1]
+        ]
+    },
+    xAxis: {
+        type: 'category',
+        data: ['Matcha Latte', 'Milk Tea', 'Cheese Cocoa', 'Walnut Brownie']
+        
+    },
+    yAxis: {},
+    // Declare several bar series, each will be mapped
+    // to a column of dataset.source by default.
+    series: [
+        {
+            type: 'bar',
+            name: '2015',
+            data: [43.5, 83.1, 86.4, 72.4]
+        },
+        {
+            type: 'bar',
+            name: '2016',
+            data: [85.8, 73.4, 65.2, 53.9]
+        },
+        {
+            type: 'bar',
+            name: '2017',
+            data: [93.7, 55.1, 82.5, 39.1]
+        },
+    ],
+    "toolbox": {
+        "feature": {
+        "dataView": {}
+    }}
+};
+
+```
+
+
+
+渲染出的柱状图和上面的代码一样，当我们再点击数据视图时，发现我们的问题解决了：
+
+![屏幕快照 2019-10-24 下午6.58.15](https://github.com/Namily/PicOwner/blob/master/2019/10/屏幕快照 2019-10-24 下午6.58.15.png?raw=true)
+
+
+
+简单总结一下，其实我没有熟读过Echarts的API，但是我觉得我们从接口取回的数据可以放在dataSet里面，也可以放在series里面进行处理。
+
+好久没有更新文章，只是做一下简单的记录。
