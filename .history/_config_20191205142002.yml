@@ -1,3 +1,7 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
 # Site
 title: 我家小韩真漂亮
 subtitle:
@@ -9,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://aspirinlovehyn.top
+url: http://yoursite.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

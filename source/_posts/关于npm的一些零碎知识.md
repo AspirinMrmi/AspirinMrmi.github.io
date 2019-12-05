@@ -8,9 +8,13 @@ categories: Love & Peace
 description: npm 是JavaScript 世界的包管理工具，并且是Node.js 平台的默认包管理工具。通过npm 可以安装、共享、分发代码，管理项目依赖关系。
 ---
 
+![头](https://i.loli.net/2019/12/05/FHMsf7TEea1OAkc.jpg)
+
 ## npm是什么？
 
 npm 是JavaScript 世界的包管理工具，并且是Node.js 平台的默认包管理工具。通过npm 可以安装、共享、分发代码，管理项目依赖关系。
+
+<!--more-->
 
 ## npm包发布与管理
 
