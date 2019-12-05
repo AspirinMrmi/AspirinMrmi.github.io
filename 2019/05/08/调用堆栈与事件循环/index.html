@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+      调用堆栈与事件循环 |  我家小韩真漂亮
+    </title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">  <script src="/js/pace.min.js"></script>
+  </head>
+</html>
+
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-调用堆栈与事件循环" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  调用堆栈与事件循环
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/05/08/调用堆栈与事件循环/" class="article-date">
+  <time datetime="2019-05-08T13:57:21.000Z" itemprop="datePublished">2019-05-08</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Love-Peace/">Love & Peace</a>
+  </div>
+
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p><img src="https://i.loli.net/2019/12/05/ytGJh4vIpTWdEzF.jpg" alt="头"></p>
+<h1 id="专业术语什么的都是纸老虎"><a href="#专业术语什么的都是纸老虎" class="headerlink" title="专业术语什么的都是纸老虎"></a>专业术语什么的都是纸老虎</h1><hr>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>调用栈是解析器的一种机制，可以在脚本调用多个函数时，跟踪每个函数在完成执行时应该返回控制的点。（当前在执行什么函数，什么函数被榨干函数调用，接下来调用哪一个函数）</p>
+<a id="more"></a>
+<ul>
+<li>当脚本要调用一个函数时，解析器把该函数添加到栈中并且执行这个函数。</li>
+<li>任何被这个函数调用的函数会进一步添加到调用栈中，并且运行到它们被上个程序调用的位置。</li>
+<li>当函数运行结束后，解释器将它从堆栈中取出，并在主代码列表中继续执行代码。</li>
+<li>如果栈占用的空间比分配给它的空间还大，那么则会导致Stack Overflow(栈溢出)错误。</li>
+</ul>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function greeting() &#123;</span><br><span class="line">   // [1] Some codes here</span><br><span class="line">   sayHi();</span><br><span class="line">   // [2] Some codes here</span><br><span class="line">&#125;</span><br><span class="line">function sayHi() &#123;</span><br><span class="line">   return &quot;Hi!&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 调用 `greeting` 方法</span><br><span class="line">greeting();</span><br><span class="line"></span><br><span class="line">// [3] Some codes here</span><br></pre></td></tr></table></figure>
+<p>解释下上面代码的执行：</p>
+<ol>
+<li>忽略一切罗里吧嗦的东西，直到到大greeting()方法。</li>
+<li>调用greeting()方法。</li>
+<li>把<code>greeting()</code>方法加入到调用栈列表。</li>
+<li>执行<code>greeting</code>方法中的所有代码。</li>
+<li>到达sayHi()方法。</li>
+<li>把<code>sayHi()</code>方法加入到调用栈列表。</li>
+<li>执行sayHi()函数中的所有代码，直到结束。</li>
+<li>把执行返回到调用sayHi()的行，并继续执行greeting()方法的其余部分。</li>
+<li>把sayHi()方法从调用栈列表删除。</li>
+<li>当greeting()方法中的所有代码执行完毕以后，返回到调用该方法的地方继续执行其余的代码。</li>
+<li>把greeting()方法从调用栈列表中删除。</li>
+</ol>
+<p>我们的调用栈列表生不带来，死不带走，从一个空的调用栈开始，当所有代码执行完毕，我们得到的还是一个空的调用栈。</p>
+<p>基本的原理就是，每当我的代码中有函数被调用，该函数就会自动添加到栈中，在执行完该函数的所有代码任务后，它就会自动从栈中删除。</p>
+<h3 id="堆栈追踪"><a href="#堆栈追踪" class="headerlink" title="堆栈追踪"></a>堆栈追踪</h3><p>由此我们可以清楚的知道当异常发生的时候堆栈追踪是怎么被构造的，堆栈的状态是如何的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">      throw new Error(&apos;SessionStack will help you resolve crashes :)&apos;);</span><br><span class="line">&#125;</span><br><span class="line">function bar() &#123;</span><br><span class="line">  foo();</span><br><span class="line">&#125;</span><br><span class="line">function start() &#123;</span><br><span class="line">  bar();</span><br><span class="line">&#125;</span><br><span class="line">start();</span><br></pre></td></tr></table></figure>
+<p>如果这段代码保存在本地的一个foo.js文件中并且运行在Chrome中我们通过控制台可以看到：<br><img src="https://cdn-images-1.medium.com/max/1600/1*T-W_ihvl-9rG4dn18kP3Qw.png" alt="image"></p>
+<h3 id="堆栈溢出"><a href="#堆栈溢出" class="headerlink" title="堆栈溢出"></a>堆栈溢出</h3><p>调用堆栈的空间是有限的，当达到其峰值时候就会发生堆栈溢出的错误。比方说：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">  foo();</span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<p>这个递归函数 反复调用foo()函数，结果会导致栈变成这样：</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*AycFMDy9tlDmNoc5LXd9-g.png" alt="image"></p>
+<p>然后，在某一个时刻，调用栈中的函数的调用数量超过了调用栈的实际大小，浏览器就决定要干掉它，抛出一个错误：</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*e0nEd59RPKz9coyY8FX-uw.png" alt="image"></p>
+<p>掘金上有一篇非常不错的文章，我就不搬了。文章介绍的特别全面，图文结合把JavaScript这门单线程语言的执行机制介绍的淋漓尽致。有兴趣请戳：<a href="https://juejin.im/post/59e85eebf265da430d571f89" target="_blank" rel="noopener">这里这里这里</a>~</p>
+<h2 id="下面是我看小哥的文章下来的收获："><a href="#下面是我看小哥的文章下来的收获：" class="headerlink" title="下面是我看小哥的文章下来的收获："></a>下面是我看小哥的文章下来的收获：</h2><h3 id="执行机制"><a href="#执行机制" class="headerlink" title="执行机制"></a>执行机制</h3><p><img src="https://user-gold-cdn.xitu.io/2017/11/21/15fdd88994142347?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image"></p>
+<p>图片介绍：</p>
+<ol>
+<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入Event Table并注册函数。</li>
+<li>当指定的事情完成时，Event Table会将这个函数移入Event Queue。</li>
+<li>主线程内的任务执行完毕为空，会去Event Queue读取对应的函数，进入主线程执行。</li>
+<li>上述过程会不断重复，也就是常说的Event Loop(事件循环)。</li>
+</ol>
+<ul>
+<li><strong>Q:setInterval的回调函数fn执行时间超过了延迟时间ms，那么就完全看不出来有时间间隔了？？？</strong></li>
+<li>——-我的理解是fn的执行时间超过了延迟时间ms，那样的话，在延迟的时间里已经将下一次要执行的fn置入了Event Queue，在相对较长的fn执行时间过后，主线程会立马从Event Queue中去取下一个要执行的fn所以我们完全看不出来有时间间隔。</li>
+<li><strong>那么什么时候会出现这种完全没有时间间隔的情况呢？</strong></li>
+<li><strong>Q:setTimeout(fn,0)这样的代码，0秒后执行又是什么意思呢？是不是可以立即执行呢？</strong></li>
+<li>——- setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，意思就是不用再等多少秒了，只要主线程执行栈内的同步任务全部执行完成，栈为空就马上执行了。</li>
+</ul>
+<h2 id="Promise与process-nextTick-callback"><a href="#Promise与process-nextTick-callback" class="headerlink" title="Promise与process.nextTick(callback)"></a>Promise与process.nextTick(callback)</h2><p>除了广义的同步任务和异步任务，我们还有对任务更为精细的定义：</p>
+<ul>
+<li>macro-task(宏任务)：包括整体代码script，setTimeout，setInterval</li>
+<li>micro-task(微任务)：Promise，process.nextTick</li>
+</ul>
+<p>事件循环，宏任务，微任务的关系如图所示：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/21/15fdcea13361a1ec?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image"></p>
+<p>事件循环的顺序，决定js代码的执行顺序。进入整体代码（宏任务）后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;setTimeout&apos;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;promise&apos;);</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;then&apos;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(&apos;console&apos;);</span><br></pre></td></tr></table></figure>
+<p>执行结果为：</p>
+<ul>
+<li>promise</li>
+<li>console</li>
+<li>then</li>
+<li>setTimeout</li>
+</ul>
+<hr>
+<p>以上，溜了。</p>
+<p><img src="http://imgnews.mumayi.com/file/2018/03/09/2d8974daae1b5a9157afb439a039ad14.png" alt="image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/08/调用堆栈与事件循环/" data-id="ck3s6xmbz000av3znrnp038ph" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Principle/">Principle</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2019/05/14/一些工作中总结/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            一些工作中总结
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/04/10/学习TypeScript-基础篇-Part-2/" class="article-nav-link">
+        <strong class="article-nav-caption">Older posts</strong>
+        <div class="article-nav-title">学习TypeScript(基础篇)-Part.2</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'f295049de18d8401e996',
+      clientSecret: '6c99e302ccc4eb0fc6775db22fc7bb3517c7f8aa',
+      repo: 'AspirinMrmi.github.io',
+      owner: 'AspirinMrMi',
+      admin: ['AspirinMrMi'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2018-2019
+        Aspirin
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/love.svg" alt="我家小韩真漂亮"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">About</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </div>
+</body>
+
+</html>

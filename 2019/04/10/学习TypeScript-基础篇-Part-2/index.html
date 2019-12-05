@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+      学习TypeScript(基础篇)-Part.2 |  我家小韩真漂亮
+    </title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">  <script src="/js/pace.min.js"></script>
+  </head>
+</html>
+
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-学习TypeScript-基础篇-Part-2" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  学习TypeScript(基础篇)-Part.2
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/04/10/学习TypeScript-基础篇-Part-2/" class="article-date">
+  <time datetime="2019-04-10T13:57:21.000Z" itemprop="datePublished">2019-04-10</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Love-Peace/">Love & Peace</a>
+  </div>
+
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p><img src="https://i.loli.net/2019/12/05/K9qyXAYflv56Dgs.jpg" alt="头"></p>
+<blockquote>
+<h3 id="把自己不喜欢的事情做好看"><a href="#把自己不喜欢的事情做好看" class="headerlink" title="把自己不喜欢的事情做好看"></a>把自己不喜欢的事情做好看</h3></blockquote>
+<h2 id="原始数据类型"><a href="#原始数据类型" class="headerlink" title="原始数据类型"></a>原始数据类型</h2><p>接下来主要学习Ts的基本概念和常用类型。</p>
+<a id="more"></a>
+<p>Js的类型分为：</p>
+<ul>
+<li>原始数据类型</li>
+<li>对象类型</li>
+</ul>
+<p>原始数据类型包括：</p>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>bool</li>
+<li>number</li>
+<li>string</li>
+<li>Symbol(Es6新增)</li>
+</ul>
+<p>下面一次介绍这几种基本类型在ts中的应用</p>
+<h3 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h3><p>在js中是没有空值的概念的，但是在ts中，可以使用void表示没有任何返回值的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function alertName(): void &#123;</span><br><span class="line">    alert(&apos;My name is Tom&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>声明一个void类型并没有什么卵用，因为你只能将它赋值为undefined和null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let unusable: void = undefined</span><br></pre></td></tr></table></figure>
+<h3 id="null-和-undefined"><a href="#null-和-undefined" class="headerlink" title="null 和 undefined"></a>null 和 undefined</h3><p>在ts中，可以使用null和undefined来定义这两个原始数据类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let u: undefined = undefined;</span><br><span class="line">let n: null = null;</span><br></pre></td></tr></table></figure>
+<p>undefined的类型的变量只能被赋值为undefined，null类型的变量只能被赋值为null。</p>
+<p>与void的区别是：</p>
+<p>undefined和null是所有类型的子类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let num: number = undefined;</span><br></pre></td></tr></table></figure>
+<p>or like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let u: undefined;</span><br><span class="line">let num: number = u;</span><br></pre></td></tr></table></figure>
+<p>而<code>void</code>类型的变量不能赋值给<code>number</code>类型的变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let v: void;</span><br><span class="line">let num: number = v;</span><br></pre></td></tr></table></figure>
+<p>如上会报错：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g1xv1bb3odj30ta06kt9e.jpg" alt="image"></p>
+<h3 id="bool"><a href="#bool" class="headerlink" title="bool"></a>bool</h3><p>布尔值比较简单了就：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let isBeautiful: boolean = true;</span><br></pre></td></tr></table></figure>
+<h3 id="number"><a href="#number" class="headerlink" title="number"></a>number</h3><p><code>number</code>类型也比较简单：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let luckyNumber: number = 666;</span><br></pre></td></tr></table></figure>
+<p>这里<code>666</code>可以是其他进制数字。</p>
+<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><p>我觉得理解起来很容易，直接上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let myName: string = Aspirin;</span><br><span class="line">let myAge: number = 26;</span><br><span class="line">let compose: string = `My name&apos;s $&#123;myName&#125;,I&apos;m $&#123;myAge&#125; years old`</span><br></pre></td></tr></table></figure>
+<p>上面我们引入了Es6的模板字符串。</p>
+<p>OK，我们通过对原始数据类型在ts中是如何定义运用，也顺道复习了一下js中的基本数据类型都有啥子，面试经常问，虽然很基础，但还是希望自己不要栽跟头。</p>
+<p>以上，Good night。</p>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><ul>
+<li>我们在讨论null和undefined的时候，正常情况下是会报错的：<br><img src="https://ws2.sinaimg.cn/large/006tNc79ly1g1xv32gpyxj30ts072js4.jpg" alt="image">这里我们需要把tsconfig文件里的strictNullChecks关闭掉。</li>
+<li>如Part1所说的，我可以通过<code>tsc</code>命令来编译我们写的ts文件，然后可以通过<code>node</code>命令去看看结果是不是我们所期望中的，算是个tips吧。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/10/学习TypeScript-基础篇-Part-2/" data-id="ck3s6xmbx0006v3zntd5qozsc" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2019/05/08/调用堆栈与事件循环/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            调用堆栈与事件循环
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/04/09/学习TypeScript-基础篇-Part-1/" class="article-nav-link">
+        <strong class="article-nav-caption">Older posts</strong>
+        <div class="article-nav-title">学习TypeScript(基础篇)-Part.1</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'f295049de18d8401e996',
+      clientSecret: '6c99e302ccc4eb0fc6775db22fc7bb3517c7f8aa',
+      repo: 'AspirinMrmi.github.io',
+      owner: 'AspirinMrMi',
+      admin: ['AspirinMrMi'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2018-2019
+        Aspirin
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/love.svg" alt="我家小韩真漂亮"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">About</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </div>
+</body>
+
+</html>

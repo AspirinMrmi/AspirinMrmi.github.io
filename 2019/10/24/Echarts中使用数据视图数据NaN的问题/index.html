@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+      Echarts中使用数据视图数据NaN的问题 |  我家小韩真漂亮
+    </title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">  <script src="/js/pace.min.js"></script>
+  </head>
+</html>
+
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Echarts中使用数据视图数据NaN的问题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Echarts中使用数据视图数据NaN的问题
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/10/24/Echarts中使用数据视图数据NaN的问题/" class="article-date">
+  <time datetime="2019-10-24T11:03:58.000Z" itemprop="datePublished">2019-10-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Love-Peace/">Love & Peace</a>
+  </div>
+
+    </div>
+    
+
+    
+    
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p><img src="https://i.loli.net/2019/12/05/I2MWFsZfRLT6tgA.jpg" alt="头"></p>
+<p>最近在工作中遇到一个比较有意思（棘手）的问题</p>
+<p>有意思的问题之处不在于其本身有意思而是我在试图百度以及Google的时候并没有找到问题的合理解决方式</p>
+<p>简单介绍下问题的背景，其实很简单，就是要将一个Echarts的图表增加一个ToolBox，可以让用户看到数据视图，Echarts本身的API也是有这个功能的，但是奇怪的是，在增加了数据视图之后，并没有看到预期的数据形式。</p>
+<a id="more"></a>
+<p>在搜索解决方式的时候发现也有人在Echarts的官方仓库提了一个issue： <a href="https://github.com/apache/incubator-echarts/issues/7533。" target="_blank" rel="noopener">https://github.com/apache/incubator-echarts/issues/7533。</a></p>
+<p>拿一个官方示例来看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">option = &#123;</span><br><span class="line">    legend: &#123;&#125;,</span><br><span class="line">    tooltip: &#123;&#125;,</span><br><span class="line">    dataset: &#123;</span><br><span class="line">        source: [</span><br><span class="line">            [<span class="string">'product'</span>, <span class="string">'2015'</span>, <span class="string">'2016'</span>, <span class="string">'2017'</span>],</span><br><span class="line">            [<span class="string">'Matcha Latte'</span>, <span class="number">43.3</span>, <span class="number">85.8</span>, <span class="number">93.7</span>],</span><br><span class="line">            [<span class="string">'Milk Tea'</span>, <span class="number">83.1</span>, <span class="number">73.4</span>, <span class="number">55.1</span>],</span><br><span class="line">            [<span class="string">'Cheese Cocoa'</span>, <span class="number">86.4</span>, <span class="number">65.2</span>, <span class="number">82.5</span>],</span><br><span class="line">            [<span class="string">'Walnut Brownie'</span>, <span class="number">72.4</span>, <span class="number">53.9</span>, <span class="number">39.1</span>]</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    xAxis: &#123;<span class="attr">type</span>: <span class="string">'category'</span>&#125;,</span><br><span class="line">    yAxis: &#123;&#125;,</span><br><span class="line">    <span class="comment">// Declare several bar series, each will be mapped</span></span><br><span class="line">    <span class="comment">// to a column of dataset.source by default.</span></span><br><span class="line">    series: [</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样渲染出的图表如下：</p>
+<p><img src="https://github.com/Namily/PicOwner/blob/master/2019/10/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-10-24%20%E4%B8%8B%E5%8D%884.00.13.png?raw=true" alt="屏幕快照 2019-10-24 下午4.00.13"></p>
+<p>当我试图要加一个数据视图时：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"toolbox"</span>: &#123;</span><br><span class="line">	<span class="string">"feature"</span>: &#123;</span><br><span class="line">  	<span class="string">"dataView"</span>: &#123;&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/Namily/PicOwner/blob/master/2019/10/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-10-24%20%E4%B8%8B%E5%8D%886.39.35.png?raw=true" alt="屏幕快照 2019-10-24 下午6.39.35"></p>
+<p>数据视图如上所示</p>
+<p><strong>解决方案</strong></p>
+<p>调整数据格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">option = &#123;</span><br><span class="line">    legend: &#123;&#125;,</span><br><span class="line">    tooltip: &#123;&#125;,</span><br><span class="line">    dataset: &#123;</span><br><span class="line">        source: [</span><br><span class="line">            [<span class="string">'product'</span>, <span class="string">'2015'</span>, <span class="string">'2016'</span>, <span class="string">'2017'</span>],</span><br><span class="line">            [<span class="string">'Matcha Latte'</span>, <span class="number">43.3</span>, <span class="number">85.8</span>, <span class="number">93.7</span>],</span><br><span class="line">            [<span class="string">'Milk Tea'</span>, <span class="number">83.1</span>, <span class="number">73.4</span>, <span class="number">55.1</span>],</span><br><span class="line">            [<span class="string">'Cheese Cocoa'</span>, <span class="number">86.4</span>, <span class="number">65.2</span>, <span class="number">82.5</span>],</span><br><span class="line">            [<span class="string">'Walnut Brownie'</span>, <span class="number">72.4</span>, <span class="number">53.9</span>, <span class="number">39.1</span>]</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    xAxis: &#123;</span><br><span class="line">        type: <span class="string">'category'</span>,</span><br><span class="line">        data: [<span class="string">'Matcha Latte'</span>, <span class="string">'Milk Tea'</span>, <span class="string">'Cheese Cocoa'</span>, <span class="string">'Walnut Brownie'</span>]</span><br><span class="line">        </span><br><span class="line">    &#125;,</span><br><span class="line">    yAxis: &#123;&#125;,</span><br><span class="line">    <span class="comment">// Declare several bar series, each will be mapped</span></span><br><span class="line">    <span class="comment">// to a column of dataset.source by default.</span></span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            type: <span class="string">'bar'</span>,</span><br><span class="line">            name: <span class="string">'2015'</span>,</span><br><span class="line">            data: [<span class="number">43.5</span>, <span class="number">83.1</span>, <span class="number">86.4</span>, <span class="number">72.4</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            type: <span class="string">'bar'</span>,</span><br><span class="line">            name: <span class="string">'2016'</span>,</span><br><span class="line">            data: [<span class="number">85.8</span>, <span class="number">73.4</span>, <span class="number">65.2</span>, <span class="number">53.9</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            type: <span class="string">'bar'</span>,</span><br><span class="line">            name: <span class="string">'2017'</span>,</span><br><span class="line">            data: [<span class="number">93.7</span>, <span class="number">55.1</span>, <span class="number">82.5</span>, <span class="number">39.1</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"toolbox"</span>: &#123;</span><br><span class="line">        <span class="string">"feature"</span>: &#123;</span><br><span class="line">        <span class="string">"dataView"</span>: &#123;&#125;</span><br><span class="line">    &#125;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>渲染出的柱状图和上面的代码一样，当我们再点击数据视图时，发现我们的问题解决了：</p>
+<p><img src="https://github.com/Namily/PicOwner/blob/master/2019/10/屏幕快照 2019-10-24 下午6.58.15.png?raw=true" alt="屏幕快照 2019-10-24 下午6.58.15"></p>
+<p>简单总结一下，其实我没有熟读过Echarts的API，但是我觉得我们从接口取回的数据可以放在dataSet里面，也可以放在series里面进行处理。</p>
+<p>好久没有更新文章，只是做一下简单的记录。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/24/Echarts中使用数据视图数据NaN的问题/" data-id="ck3s6xmbo0000v3zn1vd7ljq0" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/charts/">charts</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/05/14/一些工作中总结/" class="article-nav-link">
+        <strong class="article-nav-caption">Older posts</strong>
+        <div class="article-nav-title">一些工作中总结</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'f295049de18d8401e996',
+      clientSecret: '6c99e302ccc4eb0fc6775db22fc7bb3517c7f8aa',
+      repo: 'AspirinMrmi.github.io',
+      owner: 'AspirinMrMi',
+      admin: ['AspirinMrMi'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2018-2019
+        Aspirin
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/love.svg" alt="我家小韩真漂亮"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">About</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </div>
+</body>
+
+</html>
