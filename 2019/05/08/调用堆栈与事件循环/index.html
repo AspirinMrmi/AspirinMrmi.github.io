@@ -100,7 +100,7 @@
 <p>然后，在某一个时刻，调用栈中的函数的调用数量超过了调用栈的实际大小，浏览器就决定要干掉它，抛出一个错误：</p>
 <p><img src="https://cdn-images-1.medium.com/max/1600/1*e0nEd59RPKz9coyY8FX-uw.png" alt="image"></p>
 <p>掘金上有一篇非常不错的文章，我就不搬了。文章介绍的特别全面，图文结合把JavaScript这门单线程语言的执行机制介绍的淋漓尽致。有兴趣请戳：<a href="https://juejin.im/post/59e85eebf265da430d571f89" target="_blank" rel="noopener">这里这里这里</a>~</p>
-<h2 id="下面是我看小哥的文章下来的收获："><a href="#下面是我看小哥的文章下来的收获：" class="headerlink" title="下面是我看小哥的文章下来的收获："></a>下面是我看小哥的文章下来的收获：</h2><h3 id="执行机制"><a href="#执行机制" class="headerlink" title="执行机制"></a>执行机制</h3><p><img src="https://user-gold-cdn.xitu.io/2017/11/21/15fdd88994142347?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image"></p>
+<h2 id="下面是我看小哥的文章下来的收获："><a href="#下面是我看小哥的文章下来的收获：" class="headerlink" title="下面是我看小哥的文章下来的收获："></a>下面是我看小哥的文章下来的收获：</h2><h3 id="执行机制"><a href="#执行机制" class="headerlink" title="执行机制"></a>执行机制</h3><p><img src="https://i.loli.net/2019/12/05/Q6Nyr2XSfasiZbH.jpg" alt="image"></p>
 <p>图片介绍：</p>
 <ol>
 <li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入Event Table并注册函数。</li>
@@ -121,7 +121,7 @@
 <li>micro-task(微任务)：Promise，process.nextTick</li>
 </ul>
 <p>事件循环，宏任务，微任务的关系如图所示：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/21/15fdcea13361a1ec?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image"></p>
+<p><img src="https://i.loli.net/2019/12/05/YBLovDHInagGkpc.jpg" alt="image"></p>
 <p>事件循环的顺序，决定js代码的执行顺序。进入整体代码（宏任务）后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;setTimeout&apos;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;promise&apos;);</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;then&apos;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(&apos;console&apos;);</span><br></pre></td></tr></table></figure>
 <p>执行结果为：</p>
@@ -138,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/08/调用堆栈与事件循环/" data-id="ck3s6xmbz000av3znrnp038ph" class="article-share-link">Share</a>
+      <a data-url="https://aspirinlovehyn.top/2019/05/08/调用堆栈与事件循环/" data-id="ck3sc6ryp000bqzznekyu7aq9" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Principle/">Principle</a></li></ul>
 
@@ -242,10 +242,6 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/archives">Archives</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">About</a>
     </li>
     
   </ul>

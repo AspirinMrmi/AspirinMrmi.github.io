@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+      学习TypeScript(基础篇)-Part.3 |  我家小韩真漂亮
+    </title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">  <script src="/js/pace.min.js"></script>
+  </head>
+</html>
+
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-学习TypeScript-基础篇-Part-3" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  学习TypeScript(基础篇)-Part.3
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/12/05/学习TypeScript-基础篇-Part-3/" class="article-date">
+  <time datetime="2019-12-05T06:16:02.000Z" itemprop="datePublished">2019-12-05</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Love-Peace/">Love & Peace</a>
+  </div>
+
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p><img src="https://i.loli.net/2019/12/05/h7IlaVBjeXTPQvY.jpg" alt="ts"></p>
+<blockquote>
+<p>断更N天，肥来了肥来了。</p>
+</blockquote>
+<h2 id="任意值"><a href="#任意值" class="headerlink" title="任意值"></a>任意值</h2><p>任意值（any）用来表示允许赋值为任意类型</p>
+<a id="more"></a>
+<h3 id="什么是任意值类型？"><a href="#什么是任意值类型？" class="headerlink" title="什么是任意值类型？"></a>什么是任意值类型？</h3><p>当我们定义了一个普通类型的值以后，再去改变它的类型是不允许的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myLuckyNumber: number = <span class="number">10</span>;</span><br><span class="line">myLuckyNumber = <span class="string">"ten"</span>;</span><br></pre></td></tr></table></figure>
+<p>以上代码会报错，不允许将本来是number类型的变量修改为string</p>
+<p>但是，如果我们定义了一个变量的类型为任意类型（any），它可以允许再被赋值以任何其他的类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myLuckyNumber : any = <span class="number">10</span>;</span><br><span class="line">myLuckyNumber = <span class="string">'ten'</span>;</span><br></pre></td></tr></table></figure>
+<p>以上代码不会报错</p>
+<h3 id="什么时候用任意值类型？"><a href="#什么时候用任意值类型？" class="headerlink" title="什么时候用任意值类型？"></a>什么时候用任意值类型？</h3><p>在我们编程的过程中，当我们不确定我们写的程序的变量是什么类型或者该变量类型是动态变化的时候，可以将其声明为任意值类型。</p>
+<p>它可以使我们轻松地通过编译。</p>
+<h3 id="能否用Object取代？"><a href="#能否用Object取代？" class="headerlink" title="能否用Object取代？"></a>能否用Object取代？</h3><p>不能</p>
+<p>你可能会想用Object来替代any，但是Object只能由我们来为其指定一些值，而不能去调用它的一些方法或者属性，即使该方法或者该属性存在于这个变量之上：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> prettySure: <span class="built_in">Object</span> = <span class="number">10</span>;</span><br><span class="line">prettySure.toFixed(); <span class="comment">// Error: Property 'toFixed' doesn't exist on type 'Object'.</span></span><br></pre></td></tr></table></figure>
+<p>这里编译不会通过。</p>
+<h3 id="任意值的属性和方法"><a href="#任意值的属性和方法" class="headerlink" title="任意值的属性和方法"></a>任意值的属性和方法</h3><p>但是在任意值类型上去访问任何属性、任何方法都是可以的，都可以通过编译：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> notSure : any = <span class="number">10</span>;</span><br><span class="line">noSure.ifItExits(); <span class="comment">// Okay, ifItExits might exits at runtime</span></span><br><span class="line">notSure.toFixed(); <span class="comment">// Okay, toFixed exists (but the compiler doesn't check)</span></span><br></pre></td></tr></table></figure>
+<p><strong>这里指的只是编译可以通过，在编译生成的js文件中，如果这些属性和方法不存在于这个变量上，那么也会报错</strong></p>
+<h3 id="未声明类型的变量"><a href="#未声明类型的变量" class="headerlink" title="未声明类型的变量"></a>未声明类型的变量</h3><p>变量如果在声明之初并未指定其类型，那么它会被识别为任意值类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> something;</span><br><span class="line">something = <span class="string">'seven'</span>;</span><br><span class="line">something = <span class="number">7</span>;</span><br><span class="line">something.setName(<span class="string">'Tom'</span>);</span><br></pre></td></tr></table></figure>
+<p>上面的代码等价于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> something: any;</span><br><span class="line">something = <span class="string">'seven'</span>;</span><br><span class="line">something = <span class="number">7</span>;</span><br><span class="line">something.setName(<span class="string">'Tom'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="其他场景"><a href="#其他场景" class="headerlink" title="其他场景"></a>其他场景</h3><p>我们不清楚一个数组里究竟是怎样的类型结构的时候</p>
+<p>直接看代码比较直观：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list: any[] = [<span class="number">1</span>, <span class="literal">true</span>, <span class="string">"free"</span>];</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://aspirinlovehyn.top/2019/12/05/学习TypeScript-基础篇-Part-3/" data-id="ck3sc6ryn000aqzznb2op9u2k" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/10/24/Echarts中使用数据视图数据NaN的问题/" class="article-nav-link">
+        <strong class="article-nav-caption">Older posts</strong>
+        <div class="article-nav-title">Echarts中使用数据视图数据NaN的问题</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'f295049de18d8401e996',
+      clientSecret: '6c99e302ccc4eb0fc6775db22fc7bb3517c7f8aa',
+      repo: 'AspirinMrmi.github.io',
+      owner: 'AspirinMrMi',
+      admin: ['AspirinMrMi'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2018-2019
+        Aspirin
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/love.svg" alt="我家小韩真漂亮"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </div>
+</body>
+
+</html>
