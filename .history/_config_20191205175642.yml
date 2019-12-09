@@ -1,21 +1,21 @@
 # Site
 title: Aspirin's Blog
 subtitle: 我家小韩真漂亮
-description:
-keywords:
+description: 一个记录个人学习成长的博客
+keywords: "宠妻异地恋高级选手,铲屎官,音乐,读书,电影"
 author: Aspirin
-language:
-timezone:
+language: zh-Hans
+timezone: Asia/Beijing
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://aspirinlovehyn.top
 root: /
-permalink: :year/:title/
+permalink: :year/:id/
 permalink_defaults:
 
 pretty_urls:
-  trailing_index: false # Set to false to remove trailing index.html from permalinks
+  trailing_index: true # Set to false to remove trailing index.html from permalinks
 
 # Directory
 source_dir: source

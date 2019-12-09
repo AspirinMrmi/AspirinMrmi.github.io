@@ -1,0 +1,101 @@
+---
+title: 学习TypeScript(基础篇)-Part.4
+date: 2019-12-06 10:58:51
+tags: TypeScript
+categories: 基础篇
+---
+
+
+![ts](https://i.loli.net/2019/12/04/SbMqD6oYKmJuGpI.jpg)
+
+> 例行BB，看了Modern Love第三集，总感觉能在安妮的身上找到一些影子，或者说生活中的我们都是双向患者？
+
+<!--more-->
+
+## 类型推论 && 联合类型
+
+### 类型推论
+
+##### 定义
+
+如果没有明确地指定类型，那么TypeScript会根据类型推论（Type Inference）的规则推断出一个类型
+
+#### 举例说明
+
+下面的代码如果是在我们平时写Js的时候并不会报错，但是如果放在Ts中，则会编译报错：
+
+```javascript
+let myLuckyNumber = 10;
+myLuckyNumber = 'ten';
+```
+
+在Ts中事实上它等于以下代码：
+
+```javascript
+let myLuckyNumber: number = 10;
+myLuckyNumber = 'ten';
+```
+
+我们在指定myLuckyNumber的时候并没有指定其类型，赋值的时候Ts自动推测出myLuckyNumber是一个number类型，所以再我们再次赋值为一个string的时候会编译报错。
+
+#### 定义未赋值
+
+当我们定义了一个变量，但是却没有给它赋值的时候，则其类型会被判断为any而不被类型检查：
+
+```javascript
+let myFavoriteCat;
+myFavoriteCat = 'Tiger';
+myFavoriteCat = false;
+```
+
+### 联合类型
+
+#### 定义
+
+联合类型（Union Type）表示可以取值为多种类型中的一种
+
+#### 正例
+
+```javascript
+let myLuckyNumber: string | number;
+myLuckyNumber = 10
+myLuckyNumber = 'ten';
+```
+
+#### 反例
+
+```javascript
+let myLuckyNumber: string | number;
+myLuckyNumber = false;
+```
+
+#### 访问联合类型的属性或方法
+
+当Ts不确定一个联合类型的变量是哪个类型的时候，我们只能访问该联合类型的所有类型里共有的属性和方法。
+
+```javascript
+function getLength(something: string | number): number {
+ 	return something.length; 
+}
+```
+
+上面的例子中，length不是string和number的共有属性所以会报错。
+
+```javascript
+function getString(something: string | number): string {
+  return something.toString();
+}
+```
+
+上面的例子中，访问string和number的共有方法时没有问题的。
+
+联合类型的变量在被赋值的时候，会根据类型推论得出该变量是什么类型：
+
+```javascript
+let myLuckyNumber: string | number;
+myLuckyNumber = 'ten';
+console.log(myLuckyNumber.length); // 3
+myLuckyNumber = 10;
+console.log(myLuckyNumber.length);  // 编译报错 number 没有length属性
+```
+

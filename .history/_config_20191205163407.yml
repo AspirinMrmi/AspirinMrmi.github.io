@@ -1,6 +1,6 @@
 # Site
-title: Aspirin's Blog
-subtitle: 我家小韩真漂亮
+title: 我家小韩真漂亮
+subtitle:
 description:
 keywords:
 author: Aspirin
@@ -13,9 +13,6 @@ url: https://aspirinlovehyn.top
 root: /
 permalink: :year/:title/
 permalink_defaults:
-
-pretty_urls:
-  trailing_index: false # Set to false to remove trailing index.html from permalinks
 
 # Directory
 source_dir: source

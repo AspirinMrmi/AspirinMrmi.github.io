@@ -1,0 +1,72 @@
+# 侧边栏菜单
+menu:
+  Home: /
+  Archives: /archives
+  About: /2019/ck3sjcpo90000p2zntvv1pgv4/
+
+# 网站图标和侧边栏logo
+favicon: /favicon.ico
+logo: /images/love.svg
+
+# 封面配置
+# enable-是否启用封面；path-封面背景图；logo-封面logo
+cover:
+  enable: true
+  path: /images/cover2.jpg  # images目录下附送多张美图，可更换
+  logo: /images/ayer.svg
+
+# 页面顶部进度条
+progressBar: ture
+
+# 文章配置
+# 文章太长，截断按钮文字(在需要截断的行增加此标记：<!--more-->)
+excerpt_link: Read More...
+# 文章分享文字
+share_text: Share
+# 搜索文字
+search_text: Search
+# 分页文字
+nav_text:
+  page_prev: Prev page
+  page_next: Next page
+  post_prev: Newer posts
+  post_next: Older posts
+
+# 文章页是否显示目录
+toc: true
+
+# 是否启用搜索
+# search: true
+
+# RSS订阅(先安装hexo-generator-feed插件，再去博客根目录config进行配置)
+# rss: /atom.xml
+
+# 2、Gitalk(https://github.com/gitalk/gitalk)
+gitalk:
+  enable: true
+  clientID: f295049de18d8401e996
+  clientSecret: 6c99e302ccc4eb0fc6775db22fc7bb3517c7f8aa
+  repo: AspirinMrmi.github.io
+  owner: AspirinMrMi
+  admin: AspirinMrMi
+
+# fancybox(仅用于相册展示，若需要可配置albums)
+fancybox: true
+
+# 访问量统计(不蒜子)
+busuanzi:
+  enable: false
+
+# 友盟cnzz统计(url填js代码src链接)
+cnzz:
+  enable: true
+  url: #
+
+# 数学公式
+mathjax: true
+
+# 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)
+since: 2018
+
+#是否显示页脚信息(建议保留，有助于本主题的推广)
+pageFooter: false
