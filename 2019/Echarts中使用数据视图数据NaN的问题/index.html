@@ -62,10 +62,10 @@
 
       
       <p><img src="https://i.loli.net/2019/12/05/I2MWFsZfRLT6tgA.jpg" alt="头"></p>
+<a id="more"></a>
 <p>最近在工作中遇到一个比较有意思（棘手）的问题</p>
 <p>有意思的问题之处不在于其本身有意思而是我在试图百度以及Google的时候并没有找到问题的合理解决方式</p>
 <p>简单介绍下问题的背景，其实很简单，就是要将一个Echarts的图表增加一个ToolBox，可以让用户看到数据视图，Echarts本身的API也是有这个功能的，但是奇怪的是，在增加了数据视图之后，并没有看到预期的数据形式。</p>
-<a id="more"></a>
 <p>在搜索解决方式的时候发现也有人在Echarts的官方仓库提了一个issue： <a href="https://github.com/apache/incubator-echarts/issues/7533。" target="_blank" rel="noopener">https://github.com/apache/incubator-echarts/issues/7533。</a></p>
 <p>拿一个官方示例来看：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">option = &#123;</span><br><span class="line">    legend: &#123;&#125;,</span><br><span class="line">    tooltip: &#123;&#125;,</span><br><span class="line">    dataset: &#123;</span><br><span class="line">        source: [</span><br><span class="line">            [<span class="string">'product'</span>, <span class="string">'2015'</span>, <span class="string">'2016'</span>, <span class="string">'2017'</span>],</span><br><span class="line">            [<span class="string">'Matcha Latte'</span>, <span class="number">43.3</span>, <span class="number">85.8</span>, <span class="number">93.7</span>],</span><br><span class="line">            [<span class="string">'Milk Tea'</span>, <span class="number">83.1</span>, <span class="number">73.4</span>, <span class="number">55.1</span>],</span><br><span class="line">            [<span class="string">'Cheese Cocoa'</span>, <span class="number">86.4</span>, <span class="number">65.2</span>, <span class="number">82.5</span>],</span><br><span class="line">            [<span class="string">'Walnut Brownie'</span>, <span class="number">72.4</span>, <span class="number">53.9</span>, <span class="number">39.1</span>]</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    xAxis: &#123;<span class="attr">type</span>: <span class="string">'category'</span>&#125;,</span><br><span class="line">    yAxis: &#123;&#125;,</span><br><span class="line">    <span class="comment">// Declare several bar series, each will be mapped</span></span><br><span class="line">    <span class="comment">// to a column of dataset.source by default.</span></span><br><span class="line">    series: [</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -86,7 +86,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aspirinlovehyn.top/2019/Echarts中使用数据视图数据NaN的问题/" data-id="ck3tlq2dw0001doznxsrd0l22" class="article-share-link">Share</a>
+      <a data-url="https://aspirinlovehyn.top/2019/Echarts中使用数据视图数据NaN的问题/" data-id="ck4ggrcmk0001zxs680pb1dle" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/charts/">charts</a></li></ul>
 

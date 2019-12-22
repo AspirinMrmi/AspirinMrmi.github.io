@@ -45,6 +45,64 @@
 
     
     
+    <article id="post-前端面试叨逼叨" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2019/前端面试叨逼叨/">前端面试叨逼叨</a>
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/前端面试叨逼叨/" class="article-date">
+  <time datetime="2019-12-22T03:36:47.000Z" itemprop="datePublished">2019-12-22</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p>三分天注定，七分靠打拼</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/12/22/af2Lh9iDwXMgjWd.jpg" alt></p>
+      
+      <a class="article-more-link" href="/2019/前端面试叨逼叨/">Read More...</a>
+      
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://aspirinlovehyn.top/2019/前端面试叨逼叨/" data-id="ck4ggrcnc0016zxs6lt8dczhk" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+
+</article>
+    
     <article id="post-学习TypeScript-基础篇-Part-4" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -85,29 +143,13 @@
 <blockquote>
 <p>例行BB，看了Modern Love第三集，总感觉能在安妮的身上找到一些影子，或者说生活中的我们都是双向患者？</p>
 </blockquote>
-<h2 id="类型推论-amp-amp-联合类型"><a href="#类型推论-amp-amp-联合类型" class="headerlink" title="类型推论 &amp;&amp; 联合类型"></a>类型推论 &amp;&amp; 联合类型</h2><h3 id="类型推论"><a href="#类型推论" class="headerlink" title="类型推论"></a>类型推论</h3><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><p>如果没有明确地指定类型，那么TypeScript会根据类型推论（Type Inference）的规则推断出一个类型</p>
-<h4 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h4><p>下面的代码如果是在我们平时写Js的时候并不会报错，但是如果放在Ts中，则会编译报错：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myLuckyNumber = <span class="number">10</span>;</span><br><span class="line">myLuckyNumber = <span class="string">'ten'</span>;</span><br></pre></td></tr></table></figure>
-<p>在Ts中事实上它等于以下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myLuckyNumber: number = <span class="number">10</span>;</span><br><span class="line">myLuckyNumber = <span class="string">'ten'</span>;</span><br></pre></td></tr></table></figure>
-<p>我们在指定myLuckyNumber的时候并没有指定其类型，赋值的时候Ts自动推测出myLuckyNumber是一个number类型，所以再我们再次赋值为一个string的时候会编译报错。</p>
-<h4 id="定义未赋值"><a href="#定义未赋值" class="headerlink" title="定义未赋值"></a>定义未赋值</h4><p>当我们定义了一个变量，但是却没有给它赋值的时候，则其类型会被判断为any而不被类型检查：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myFavoriteCat;</span><br><span class="line">myFavoriteCat = <span class="string">'Tiger'</span>;</span><br><span class="line">myFavoriteCat = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>联合类型（Union Type）表示可以取值为多种类型中的一种</p>
-<h4 id="正例"><a href="#正例" class="headerlink" title="正例"></a>正例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myLuckyNumber: string | number;</span><br><span class="line">myLuckyNumber = <span class="number">10</span></span><br><span class="line">myLuckyNumber = <span class="string">'ten'</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="反例"><a href="#反例" class="headerlink" title="反例"></a>反例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myLuckyNumber: string | number;</span><br><span class="line">myLuckyNumber = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="访问联合类型的属性或方法"><a href="#访问联合类型的属性或方法" class="headerlink" title="访问联合类型的属性或方法"></a>访问联合类型的属性或方法</h4><p>当Ts不确定一个联合类型的变量是哪个类型的时候，我们只能访问该联合类型的所有类型里共有的属性和方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLength</span>(<span class="params">something: string | number</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">return</span> something.length; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的例子中，length不是string和number的共有属性所以会报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getString</span>(<span class="params">something: string | number</span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> something.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的例子中，访问string和number的共有方法时没有问题的。</p>
-<p>联合类型的变量在被赋值的时候，会根据类型推论得出该变量是什么类型：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myLuckyNumber: string | number;</span><br><span class="line">myLuckyNumber = <span class="string">'ten'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(myLuckyNumber.length); <span class="comment">// 3</span></span><br><span class="line">myLuckyNumber = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(myLuckyNumber.length);  <span class="comment">// 编译报错 number 没有length属性</span></span><br></pre></td></tr></table></figure>
-
+      
+      <a class="article-more-link" href="/2019/学习TypeScript-基础篇-Part-4/">Read More...</a>
+      
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aspirinlovehyn.top/2019/学习TypeScript-基础篇-Part-4/" data-id="ck3tlq2e20006doznjsrnw0bm" class="article-share-link">Share</a>
+      <a data-url="https://aspirinlovehyn.top/2019/学习TypeScript-基础篇-Part-4/" data-id="ck4ggrcmw000fzxs621l1z7e8" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
 
@@ -171,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aspirinlovehyn.top/2019/About-me/" data-id="ck3tlq2dr0000doznrztxf05k" class="article-share-link">Share</a>
+      <a data-url="https://aspirinlovehyn.top/2019/About-me/" data-id="ck4ggrcmg0000zxs6dtcokwmn" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
 
@@ -227,14 +269,13 @@
 <blockquote>
 <p>断更N天，肥来了肥来了。</p>
 </blockquote>
-<h2 id="任意值"><a href="#任意值" class="headerlink" title="任意值"></a>任意值</h2><p>任意值（any）用来表示允许赋值为任意类型</p>
       
       <a class="article-more-link" href="/2019/学习TypeScript-基础篇-Part-3/">Read More...</a>
       
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aspirinlovehyn.top/2019/学习TypeScript-基础篇-Part-3/" data-id="ck3tlq2e4000adoznwsos6uhq" class="article-share-link">Share</a>
+      <a data-url="https://aspirinlovehyn.top/2019/学习TypeScript-基础篇-Part-3/" data-id="ck4ggrcmu000bzxs62piiwp9i" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
 
@@ -287,82 +328,15 @@
 
       
       <p><img src="https://i.loli.net/2019/12/05/I2MWFsZfRLT6tgA.jpg" alt="头"></p>
-<p>最近在工作中遇到一个比较有意思（棘手）的问题</p>
-<p>有意思的问题之处不在于其本身有意思而是我在试图百度以及Google的时候并没有找到问题的合理解决方式</p>
-<p>简单介绍下问题的背景，其实很简单，就是要将一个Echarts的图表增加一个ToolBox，可以让用户看到数据视图，Echarts本身的API也是有这个功能的，但是奇怪的是，在增加了数据视图之后，并没有看到预期的数据形式。</p>
       
       <a class="article-more-link" href="/2019/Echarts中使用数据视图数据NaN的问题/">Read More...</a>
       
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aspirinlovehyn.top/2019/Echarts中使用数据视图数据NaN的问题/" data-id="ck3tlq2dw0001doznxsrd0l22" class="article-share-link">Share</a>
+      <a data-url="https://aspirinlovehyn.top/2019/Echarts中使用数据视图数据NaN的问题/" data-id="ck4ggrcmk0001zxs680pb1dle" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/charts/">charts</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-
-</article>
-    
-    <article id="post-一些工作中总结" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2019/一些工作中总结/">一些工作中总结</a>
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2019/一些工作中总结/" class="article-date">
-  <time datetime="2019-05-14T12:48:51.000Z" itemprop="datePublished">2019-05-14</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Love-Peace/">Love & Peace</a>
-  </div>
-
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p><img src="https://i.loli.net/2019/12/05/WhuLzJkpC18Gax3.jpg" alt="头"></p>
-<blockquote>
-<p>HTTPS clone 和 SSH key 克隆区别？</p>
-</blockquote>
-<p>HTTPS相对简单，复制url，执行git clone 即可。</p>
-<p>使用SSH克隆则需要事先配置和添加SSH key</p>
-      
-      <a class="article-more-link" href="/2019/一些工作中总结/">Read More...</a>
-      
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://aspirinlovehyn.top/2019/一些工作中总结/" data-id="ck3tlq2e7000fdozn5zd28hjc" class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随记/">随记</a></li></ul>
 
     </footer>
 

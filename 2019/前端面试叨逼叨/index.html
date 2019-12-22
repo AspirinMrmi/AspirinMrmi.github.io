@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+      前端面试叨逼叨 |  Aspirin&#39;s Blog
+    </title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">  <script src="/js/pace.min.js"></script>
+  </head>
+</html>
+
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-前端面试叨逼叨" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  前端面试叨逼叨
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/前端面试叨逼叨/" class="article-date">
+  <time datetime="2019-12-22T03:36:47.000Z" itemprop="datePublished">2019-12-22</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p>三分天注定，七分靠打拼</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/12/22/af2Lh9iDwXMgjWd.jpg" alt></p>
+<a id="more"></a>
+<blockquote>
+<h3 id="JS事件循环你是如何理解的？"><a href="#JS事件循环你是如何理解的？" class="headerlink" title="JS事件循环你是如何理解的？"></a>JS事件循环你是如何理解的？</h3></blockquote>
+<p>如果你真的不是科班出身，面对这样的问题，真的是无法去解释，所以我们看图来理解一下这个让人面试屡屡头大的东西：</p>
+<p><img src="http://q2nr42tde.bkt.clouddn.com/15fdd88994142347" alt="pic"></p>
+<p>我们的程序分为两类：</p>
+<ul>
+<li>同步任务</li>
+<li>异步任务</li>
+</ul>
+<p>解读一下导图里的信息：</p>
+<ul>
+<li>同步任务和异步任务分别进入不同的执行“场所”，同步任务进入主线程，异步任务进入Event Table并注册函数；</li>
+<li>当指定的事情完成之后，Event Table会将这个函数移入Event Queue；</li>
+<li>主线程内的任务执行完毕，栈为空的时候，会去读取Event Queue中的函数，进入主线程继续执行；</li>
+<li>上述过程不断重复，就是所说的事件循环（Event Loop）；</li>
+</ul>
+<p>语言还是晦涩，通过代码来看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = [];</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url:www.javascript.com,</span><br><span class="line">    data:data,</span><br><span class="line">    success:<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'发送成功!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'代码执行结束'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>同步任务 <em>console.log(‘代码执行结束’)</em>进入主线程，异步任务ajax请求进入Event Table并注册函数<em>succes</em>；</li>
+<li><em>ajax</em>事件完成后，Event Table会将success函数移入Event Queue；</li>
+<li>主线程内的任务<em>console.log(‘代码执行结束’)</em>执行完毕，栈为空，主线程从Event Queue中读取<em>success</em>，<em>success</em>进入主线程继续执行；</li>
+</ul>
+<blockquote>
+<h3 id="setTimeout的真正意义是什么？"><a href="#setTimeout的真正意义是什么？" class="headerlink" title="setTimeout的真正意义是什么？"></a>setTimeout的真正意义是什么？</h3></blockquote>
+<p>我们通常会理解为：经过指定时间后执行回调程序。</p>
+<p>然而</p>
+<p>真相是这样的：</p>
+<p>经过指定时间后，把要执行的任务加入到Event Queue中，因为JS单线程任务都是一个一个去执行的，如果前面的任务需要执行的时间太久，那么我们指定的需要在setTimeout中执行的任务就会处于一个排号的状态，导致真正的延迟时间不一定是我们当初定义的延迟时间。</p>
+<p>举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  doSomething();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br><span class="line">sleep(<span class="number">100000</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>setTimeout(fn, 0)是个啥？</strong></p>
+</blockquote>
+<p>意思是说fn立刻执行么？</p>
+<p>答案肯定是No！</p>
+<p>其真正的含义是：</p>
+<p>指定的某个任务（fn）在主线程最早可得的空闲时间执行，即我们不用等多少秒了，就是在主线程执行栈内的所有同步任务执行完毕后，立即执行该任务。</p>
+<p>此处的立即需要注意一下：即便主线程为空，0ms实际上也是达不到的。根据HTML的标准，最低是4ms。</p>
+<p>因为只要是在setTimeout里面去执行的任务都是属于异步任务，而异步任务只有在主线程栈为空的时候才会去Event Queue去读取异步任务再去执行。</p>
+<blockquote>
+<h3 id="setInterval又是个什么鬼玩意儿？"><a href="#setInterval又是个什么鬼玩意儿？" class="headerlink" title="setInterval又是个什么鬼玩意儿？"></a>setInterval又是个什么鬼玩意儿？</h3></blockquote>
+<p>我之前的理解是setInterval(fn, ms)就是经过多长时间以后去再次执行fn，循环反复……</p>
+<p>通过上面我们对setTimeout的认识，其实这样的理解是片面且错误的。</p>
+<p>真相是这样的：</p>
+<p>setInterval会每隔指定的时间将注册的函数置入Event Queue，所以不是每过ms执行一次fn，而是每过ms会有fn进入Event  Queue，如果回调函数fn的执行时间超过了延迟时间ms，那么将看不出有时间间隔。</p>
+<blockquote>
+<h3 id="那我们聊聊宏任务和微任务吧？"><a href="#那我们聊聊宏任务和微任务吧？" class="headerlink" title="那我们聊聊宏任务和微任务吧？"></a>那我们聊聊宏任务和微任务吧？</h3></blockquote>
+<p>从广义的角度去分类，我们把任务分为两类：</p>
+<ul>
+<li>同步任务</li>
+<li>异步任务</li>
+</ul>
+<p>从更加精细 的角度去分类的话：</p>
+<ul>
+<li>宏任务（macro-task）：整体代码的script、setTimeout、setInterval</li>
+<li>微任务（micro-task）：Promise、process.nextTick</li>
+</ul>
+<p>针对于更加精细的划分，不同的任务类型会进入不同的Event Queue。</p>
+<p><strong>事件循环的顺序决定了Js的执行顺序</strong></p>
+<p>我们先照例用生涩的文字来描述这个顺序，然后记得看完图例以及代码例子后回来看这个顺序，相信都会豁然开朗：</p>
+<ul>
+<li>进入整体代码后，开始第一次循环；</li>
+<li>执行所有微任务；</li>
+<li>然后再执行宏任务，找到该宏任务其中一个任务队列执行完毕，再执行所有的微任务；</li>
+</ul>
+<p>事件循环、宏任务、微任务的关系如下图所示：</p>
+<p><img src="http://q2nr42tde.bkt.clouddn.com/15fdcea13361a1ec" alt="pic"></p>
+<p>再来看一段更加冗长复杂在面试中经常遇到的代码，我们来分析其执行的顺序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'2'</span>)</span><br><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'4'</span>)</span><br><span class="line">    resolve()</span><br><span class="line">  &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'5'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'6'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'7'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'8'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'9'</span>);</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'10'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'11'</span>);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'12'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>第一轮事件循环：</p>
+<ul>
+<li>整体代码作为一个宏任务进入主线程，遇到<em>console.log(‘1’)</em>,输出1；</li>
+<li>遇到<em>setTimeout</em>，其回调函数被分发到宏任务Event Queue中，我们暂且记该任务为setTimeout1；</li>
+<li>遇到<em>process.nextTick()</em>，其回调函数被分发到微任务Event Queue中，我们暂且记该任务为process1；</li>
+<li>遇到<em>promise</em>，new Promise直接执行，输出7；then里面的回调函数被分发到微任务Event Queue中，我们暂且记该任务为then1；</li>
+<li>再次遇到<em>setTimeout</em>，其回调函数被分发到宏任务Event Queue中，我们暂且记该任务为setTimeout2；</li>
+</ul>
+<p>所以，第一轮事件循环下来我们可以对Event Queue做以下归类：</p>
+<table>
+<thead>
+<tr>
+<th>宏任务</th>
+<th>微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setTimeout1</td>
+<td>process1</td>
+</tr>
+<tr>
+<td>setTimeout2</td>
+<td>then1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>此时已经输出了1和7；</li>
+<li>发现有可执行的微任务，所以执行process1和then1，分别输出6和8；</li>
+</ul>
+<p>OK，到了这里第一轮事件循环正式结束，输出结果为1、7、6、8。</p>
+<p>第二轮事件循环从宏任务setTimeout1开始：</p>
+<ul>
+<li>首先输出2；</li>
+<li>遇到<em>process.nextTick()</em>， 其回调函数被分发到微任务Event Queue中，我们暂且记该任务为process2；</li>
+<li>遇到<em>promise</em>，new Promise直接执行输出4，then的回调函数被分发到微任务Event Queue中，我们暂且记该任务为then2；</li>
+</ul>
+<p>所以，第二轮事件循环下来我们可以对Event Queue做以下归类：</p>
+<table>
+<thead>
+<tr>
+<th>宏任务</th>
+<th>微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>process2</td>
+</tr>
+<tr>
+<td>setTimeout2</td>
+<td>then2</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>此时已经输出了2和4；</li>
+<li>发现有可执行的微任务，所以执行process2和then2，分别输出3和5；</li>
+</ul>
+<p>OK，到了这里第二轮事件循环正式结束，输出结果为2、4、3、5。</p>
+<p>第三轮事件循环从宏任务setTimeout2开始：</p>
+<ul>
+<li>首先输出9；</li>
+<li>遇到<em>process</em>，其回调函数被分发到微任务Event Queue中，我们暂且记该任务为process3；</li>
+<li>遇到<em>promise</em>，new Promise直接执行输出11，then的回调函数被分发到微任务Event Queue中，我们暂且记该任务为then3；</li>
+</ul>
+<p>所以，第三轮事件循环下来我们可以对Event Queue做以下归类：</p>
+<table>
+<thead>
+<tr>
+<th>宏任务</th>
+<th>微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>process3</td>
+</tr>
+<tr>
+<td></td>
+<td>then3</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>此时已经输出了9和11；</li>
+<li>发现有可执行的微任务，所以执行process3和then3，分别输出10和12；</li>
+</ul>
+<p>OK，到了这里第三轮事件循环正式结束，输出结果为9、11、10、12。</p>
+<p>综上，我们的事件循环经历了三轮执行完毕，输出结果为：1、7、6、8、2、4、3、5、9、11、10、12。</p>
+<blockquote>
+<h3 id="null和undefined有什么区别？"><a href="#null和undefined有什么区别？" class="headerlink" title="null和undefined有什么区别？"></a>null和undefined有什么区别？</h3></blockquote>
+<p>null表示“没有对象”，即此处不应该有值。典型用法：</p>
+<ul>
+<li>作为函数的参数，表示该函数的参数不是对象</li>
+<li>作为对象原型链的终点</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getPrototypeof(<span class="built_in">Object</span>.prototype);</span><br><span class="line"><span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>undefined表示“缺少值”，就是本来这个地方应该有一个值，但是还没有定义。典型用法：</p>
+<ul>
+<li>变量被声明了，但是没有赋值，该变量等于undefined；</li>
+<li>调用函数时，应该提供的参数没有提供，该参数等于undefined；</li>
+<li>对象没有赋值的属性，其属性值为undefined；</li>
+<li>函数没有返回值，默认返回undefined；</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i;</span><br><span class="line">i <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>)</span>&#123;<span class="built_in">console</span>.log(x)&#125;</span><br><span class="line">f() <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span>  o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">o.p <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = f();</span><br><span class="line">x <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="window、document、DOM、BOM-有什么区别"><a href="#window、document、DOM、BOM-有什么区别" class="headerlink" title="window、document、DOM、BOM 有什么区别"></a>window、document、DOM、BOM 有什么区别</h3></blockquote>
+<ol>
+<li><ul>
+<li>DOM是 Document Object Model， 也就是文档对象模型</li>
+<li>DOM就是一个API，有了它我们就可以轻易的去操作HTML的内容（比如元素的添加、修改、删除）</li>
+</ul>
+</li>
+<li><ul>
+<li>BOM是Browser Object Model，也就是浏览器对象模型</li>
+<li>BOM也是一个API，而它就是为了操作浏览器的行为而诞生的（比如页面的跳转、前进、后退、获取屏幕大小等等）</li>
+</ul>
+</li>
+<li><ul>
+<li>document通常是一根DOM树的根节点</li>
+<li>在一个浏览器窗口可能会有多个document，例如页面加载了多个iframe</li>
+</ul>
+</li>
+<li><ul>
+<li>window是BOM的一个对象</li>
+</ul>
+</li>
+</ol>
+<p>总结一下：</p>
+<p><strong>DOM是为了操作文档而出现的API，document是其的一个对象</strong></p>
+<p><strong>BOM是为了操作浏览器行为而出现的API，window是其的一个对象</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://aspirinlovehyn.top/2019/前端面试叨逼叨/" data-id="ck4ggrcnc0016zxs6lt8dczhk" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/学习TypeScript-基础篇-Part-4/" class="article-nav-link">
+        <strong class="article-nav-caption">Older posts</strong>
+        <div class="article-nav-title">学习TypeScript(基础篇)-Part.4</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'f295049de18d8401e996',
+      clientSecret: '6c99e302ccc4eb0fc6775db22fc7bb3517c7f8aa',
+      repo: 'AspirinMrmi.github.io',
+      owner: 'AspirinMrMi',
+      admin: ['AspirinMrMi'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2018-2019
+        Aspirin
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/love.svg" alt="Aspirin&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/About-me/">About</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </div>
+</body>
+
+</html>
