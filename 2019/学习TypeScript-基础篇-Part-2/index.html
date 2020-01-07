@@ -84,28 +84,37 @@
 </ul>
 <p>下面一次介绍这几种基本类型在ts中的应用</p>
 <h3 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h3><p>在js中是没有空值的概念的，但是在ts中，可以使用void表示没有任何返回值的函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function alertName(): void &#123;</span><br><span class="line">    alert(&apos;My name is Tom&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=function%2520alertName()%253A%2520void%2520%257B%250A%2520%2520%2520%2520alert('My%2520name%2520is%2520Tom')%253B%250A%257D" style="width:100%; height:273px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>声明一个void类型并没有什么卵用，因为你只能将它赋值为undefined和null。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let unusable: void = undefined</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=let%2520unusable%253A%2520void%2520%253D%2520undefined" style="width:100%; height:223px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <h3 id="null-和-undefined"><a href="#null-和-undefined" class="headerlink" title="null 和 undefined"></a>null 和 undefined</h3><p>在ts中，可以使用null和undefined来定义这两个原始数据类型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let u: undefined = undefined;</span><br><span class="line">let n: null = null;</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=let%2520u%253A%2520undefined%2520%253D%2520undefined%253B%250Alet%2520n%253A%2520null%2520%253D%2520null%253B" style="width:100%; height:273px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>undefined的类型的变量只能被赋值为undefined，null类型的变量只能被赋值为null。</p>
 <p>与void的区别是：</p>
 <p>undefined和null是所有类型的子类型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let num: number = undefined;</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=let%2520num%253A%2520number%2520%253D%2520undefined%253B" style="width:100%; height:173px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>or like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let u: undefined;</span><br><span class="line">let num: number = u;</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=let%2520u%253A%2520undefined%253B%250Alet%2520num%253A%2520number%2520%253D%2520u%253B" style="width:100%; height:273px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>而<code>void</code>类型的变量不能赋值给<code>number</code>类型的变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let v: void;</span><br><span class="line">let num: number = v;</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=let%2520v%253A%2520void%253B%250Alet%2520num%253A%2520number%2520%253D%2520v%253B" style="width:100%; height:273px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>如上会报错：</p>
 <p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g1xv1bb3odj30ta06kt9e.jpg" alt="image"></p>
 <h3 id="bool"><a href="#bool" class="headerlink" title="bool"></a>bool</h3><p>布尔值比较简单了就：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let isBeautiful: boolean = true;</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=let%2520isBeautiful%253A%2520boolean%2520%253D%2520true%253B" style="width:100%; height:173px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <h3 id="number"><a href="#number" class="headerlink" title="number"></a>number</h3><p><code>number</code>类型也比较简单：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let luckyNumber: number = 666;</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=let%2520luckyNumber%253A%2520number%2520%253D%2520666%253B" style="width:100%; height:173px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>这里<code>666</code>可以是其他进制数字。</p>
 <h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><p>我觉得理解起来很容易，直接上代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let myName: string = Aspirin;</span><br><span class="line">let myAge: number = 26;</span><br><span class="line">let compose: string = `My name&apos;s $&#123;myName&#125;,I&apos;m $&#123;myAge&#125; years old`</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=let%2520myName%253A%2520string%2520%253D%2520Aspirin%253B%250Alet%2520myAge%253A%2520number%2520%253D%252026%253B%250Alet%2520compose%253A%2520string%2520%253D%2520%2560My%2520name's%2520%2524%257BmyName%257D%252CI'm%2520%2524%257BmyAge%257D%2520years%2520old%2560" style="width:100%; height:273px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>上面我们引入了Es6的模板字符串。</p>
 <p>OK，我们通过对原始数据类型在ts中是如何定义运用，也顺道复习了一下js中的基本数据类型都有啥子，面试经常问，虽然很基础，但还是希望自己不要栽跟头。</p>
 <p>以上，Good night。</p>
@@ -117,7 +126,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aspirinlovehyn.top/2019/学习TypeScript-基础篇-Part-2/" data-id="ck53il99r000btqznoe69gyru" class="article-share-link">Share</a>
+      <a data-url="https://aspirinlovehyn.top/2019/学习TypeScript-基础篇-Part-2/" data-id="ck53kw07x000bq9znpbcg94l0" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
 

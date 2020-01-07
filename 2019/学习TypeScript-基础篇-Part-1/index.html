@@ -63,7 +63,7 @@
       
 
       
-      <p><img src="https://i.loli.net/2019/12/05/d3EsUAyRlqjSKXt.jpg" alt="头"></p>
+      <p><img src="http://q2nr42tde.bkt.clouddn.com/IMG_4717.jpg" alt="头"></p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>总有一些东西让人望而生畏，学习这件事情也是一样。究其原因，还是因为懒惰，而造成懒惰的根本原因是对其毫无兴趣。如果觉得一件事情了无生趣，拿我们写代码来讲，最后的结果就是堆砌和stack shit。</p>
 <p>我们总是在后知后觉中学会了成长。</p>
 <a id="more"></a>
@@ -108,17 +108,20 @@
 <p>Ts文件以.ts为后缀，在React中以.tsx为后缀。</p>
 <h2 id="Hello-TypeScript"><a href="#Hello-TypeScript" class="headerlink" title="Hello TypeScript"></a>Hello TypeScript</h2><p>从一个简单的例子开始，逃不开Hello。</p>
 <p>创建一个hello.ts文件，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function sayHello(person: string) &#123;</span><br><span class="line">    return &apos;Hello, &apos; + person</span><br><span class="line">&#125;</span><br><span class="line">let user = &apos;John&apos;;</span><br><span class="line">console.log(sayHello(user));</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=function%2520sayHello(person%253A%2520string)%2520%257B%250A%2520%2520%2520%2520return%2520'Hello%252C%2520'%2520%252B%2520person%250A%257D%250Alet%2520user%2520%253D%2520'John'%253B%250Aconsole.log(sayHello(user))%253B" style="width:100%; height:300px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>在Ts中，使用 : 指定变量的类型。</p>
 <p>以上的例子中，我们指定参数person的类型为string</p>
 <p>下面我们对这个Ts文件进行编译，打开终端，键入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc hello.ts</span><br></pre></td></tr></table></figure>
 <p>这时候会生成一个hello.js的文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function sayHello(person) &#123;</span><br><span class="line">    return &apos;Hello, &apos; + person;</span><br><span class="line">&#125;</span><br><span class="line">var user = &apos;John&apos;;</span><br><span class="line">console.log(sayHello(user));</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=function%2520sayHello(person)%2520%257B%250A%2520%2520%2520%2520return%2520'Hello%252C%2520'%2520%252B%2520person%253B%250A%257D%250Avar%2520user%2520%253D%2520'John'%253B%250Aconsole.log(sayHello(user))%253B" style="width:100%; height:300px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>我们使用Ts对参数类型进行了静态的检查，但是编译后的js文件中并没有检查的代码被插入进来。</p>
 <p><strong>Ts只会进行静态检查，如果发现有错误，编译的时候就会报错。</strong></p>
 <p>如果我将ts代码修改如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function sayHello(person: string) &#123;</span><br><span class="line">    return &apos;Hello, &apos; + person</span><br><span class="line">&#125;</span><br><span class="line">let user = [&apos;a&apos;,&apos;b&apos;];</span><br><span class="line">console.log(sayHello(user));</span><br></pre></td></tr></table></figure>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=night-owl&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=18px&lh=166%25&si=false&es=4x&wm=false&code=function%2520sayHello(person%253A%2520string)%2520%257B%250A%2520%2520%2520%2520return%2520'Hello%252C%2520'%2520%252B%2520person%250A%257D%250Alet%2520user%2520%253D%2520%255B'a'%252C'b'%255D%253B%250Aconsole.log(sayHello(user))%253B" style="width:100%; height:300px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
 <p>编辑器中会提示错误，编译时也会报错，但是，不影响其最终编译为js。</p>
 <p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g1wdw3ymc5j30w0078dgo.jpg" alt="image"></p>
 <p>如果要在报错的时候终止js的生成需要进行相关的配置，这个日后再议。</p>
@@ -130,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aspirinlovehyn.top/2019/学习TypeScript-基础篇-Part-1/" data-id="ck53il99q000atqznozko5ikp" class="article-share-link">Share</a>
+      <a data-url="https://aspirinlovehyn.top/2019/学习TypeScript-基础篇-Part-1/" data-id="ck53kw07s0005q9zn4p3re8yr" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
 
