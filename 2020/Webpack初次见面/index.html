@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+      Webpack初次见面 |  Aspirin&#39;s Blog
+    </title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">  <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">  <script src="/js/pace.min.js"></script>
+  </head>
+</html>
+
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Webpack初次见面" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Webpack初次见面
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/Webpack初次见面/" class="article-date">
+  <time datetime="2020-01-10T08:39:31.000Z" itemprop="datePublished">2020-01-10</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/打包工具/">打包工具</a>
+  </div>
+
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p><img src="http://q2nr42tde.bkt.clouddn.com/WechatIMG113.jpeg" alt></p>
+<blockquote>
+<p>You’ll know when you need Webpack. If you aren’t sure if you need it, you don’t need it. </p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Lesson-1"><a href="#Lesson-1" class="headerlink" title="Lesson 1"></a>Lesson 1</h1><h2 id="为什么需要构建工具"><a href="#为什么需要构建工具" class="headerlink" title="为什么需要构建工具"></a>为什么需要构建工具</h2><ul>
+<li>转换ES6语法</li>
+<li>转换JSX</li>
+<li>CSS前缀不全、预处理器</li>
+<li>压缩混淆</li>
+<li>图片压缩</li>
+</ul>
+<h2 id="前端构建演变之路"><a href="#前端构建演变之路" class="headerlink" title="前端构建演变之路"></a>前端构建演变之路</h2><ul>
+<li>ant + YUI Tool</li>
+<li>grunt</li>
+<li>fis3 gulp</li>
+<li>Roolup  webpack parcel</li>
+</ul>
+<h2 id="为什么选择webpack"><a href="#为什么选择webpack" class="headerlink" title="为什么选择webpack"></a>为什么选择webpack</h2><ul>
+<li>社区活跃度</li>
+<li>社区生态丰富</li>
+<li>配置灵活、插件化扩展</li>
+<li>官方更新迭代快</li>
+</ul>
+<h1 id="Lesson-2"><a href="#Lesson-2" class="headerlink" title="Lesson 2"></a>Lesson 2</h1><h2 id="初识webpack"><a href="#初识webpack" class="headerlink" title="初识webpack"></a>初识webpack</h2><p>配置文件名称：</p>
+<p><code>webpack.config.js</code></p>
+<p>也可以通过命令：</p>
+<p><code>webpack --config  webpack.dev.js/webpack.prod.js</code></p>
+<p>webpack配置文件组成：</p>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=seti&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=module.exports%2520%253D%2520%257B%250A%2520%2520entry%253A%2520'.%252Fsrc%252Findex.js'%252C%2520%2520%252F%252F%2520%25E6%2589%2593%25E5%258C%2585%25E5%2585%25A5%25E5%258F%25A3%25E6%2596%2587%25E4%25BB%25B6%2520%25EF%25BC%25880%25E9%2585%258D%25E7%25BD%25AEwebpack%25E9%25BB%2598%25E8%25AE%25A4%25E5%258C%2585%25E5%2590%25AB%25EF%25BC%2589%250A%2520%2520output%253A%2520'.%252Fdist%252Fmain.js'%252C%2520%252F%252F%2520%25E6%2589%2593%25E5%258C%2585%25E8%25BE%2593%25E5%2587%25BA%2509%25EF%25BC%25880%25E9%2585%258D%25E7%25BD%25AEwebpack%25E9%25BB%2598%25E8%25AE%25A4%25E5%258C%2585%25E5%2590%25AB%25EF%25BC%2589%250A%2520%2520mode%253A%2520'production'%252C%2509%2509%252F%252F%2520%25E7%258E%25AF%25E5%25A2%2583%250A%2520%2520module%253A%2520%257B%250A%2520%2520%2520%2520rules%253A%2520%255B%2509%2509%252F%252F%2520loader%25E9%2585%258D%25E7%25BD%25AE%250A%2520%2520%2520%2520%2520%2520%257Btest%253A%2520%252F%255C.txt%2524%252F%252C%2520use%253A%2520'raw-loader'%257D%250A%2520%2520%2520%2520%255D%250A%2520%2520%257D%252C%250A%2520%2520plugins%253A%2520%255B%2509%2509%252F%252F%2520%25E6%258F%2592%25E4%25BB%25B6%25E9%2585%258D%25E7%25BD%25AE%250A%2520%2520%2520%2520new%2520HtmlwebpackPlugin(%257B%250A%2520%2520%2520%2520%2520%2520template%253A%2520'.%252Fsrc%252Findex.html'%250A%2520%2520%2520%2520%257D)%250A%2520%2520%255D%250A%257D" style="width:100%; height:473px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="安装NVM和Node-js"><a href="#安装NVM和Node-js" class="headerlink" title="安装NVM和Node.js"></a>安装NVM和Node.js</h3><p>安装nvm</p>
+<ul>
+<li>通过curl： <code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash</code></li>
+<li>通过wget： <code>wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash</code></li>
+</ul>
+<p>安装Node.js和NPM</p>
+<p><code>nvm install v10.15.3</code></p>
+<p>检查是否安装成功：</p>
+<p><code>node -v, npm -v</code></p>
+<h3 id="安装webpack和webpack-cli"><a href="#安装webpack和webpack-cli" class="headerlink" title="安装webpack和webpack-cli"></a>安装webpack和webpack-cli</h3><p>创建空目录和<code>package.json</code></p>
+<ul>
+<li><code>mkdir my-project</code></li>
+<li><code>cd my-project</code></li>
+<li><code>npm init -y</code></li>
+</ul>
+<p>安装webpack和webpack-cli</p>
+<ul>
+<li><code>npm install webpack webpack-cli --save-dev</code></li>
+<li>检查是否安装成功: <code>./node_modules/.bin/webpack -v</code></li>
+</ul>
+<h2 id="webpack初体验-——-一个简单的例子"><a href="#webpack初体验-——-一个简单的例子" class="headerlink" title="webpack初体验 —— 一个简单的例子"></a>webpack初体验 —— 一个简单的例子</h2><p>Step1 编写webpack配置文件</p>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=seti&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code='use%2520strict'%253B%250A%250Aconst%2520path%2520%253D%2520require('path')%253B%250A%250Amodule.exports%2520%253D%2520%257B%250A%2520%2520entry%253A%2520'.%252Fsrc%252Findex.js'%252C%250A%2520%2520output%253A%2520%257B%250A%2520%2520%2520%2520path%253A%2520path.resolve(__dirname%252C%2520'dist')%252C%250A%2520%2520%2520%2520filename%253A%2520'bundle.js'%250A%2520%2520%257D%252C%250A%2520%2520mode%253A%2520'production'%252C%250A%257D" style="width:100%; height:400px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
+<p>Step 2 创建一个src目录，编写一个<code>hellowebpack.js</code>的文件</p>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=seti&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=export%2520function%2520helloWebpack()%2520%257B%250A%2520%2520return%2520'Hello%2520Webpack!'%250A%257D" style="width:100%; height:273px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
+<p>Step 3 在src目录下创建入口文件<code>index.js</code></p>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=seti&wt=none&l=auto&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=import%2520%257B%2520helloWebpack%2520%257D%2520from%2520'.%252Fhellowebpack'%253B%250A%250Adocument.write(helloWebpack())%253B" style="width:100%; height:273px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
+<p>Step 4 执行打包命令</p>
+<p><code>./node_modules/.bin/webpack</code></p>
+<p><img src="http://q2nr42tde.bkt.clouddn.com/WX20200110-162254.png" alt></p>
+<p>Step 5 在生成的dist目录下编写<code>index.html</code>文件，引入打包好的<code>bundle.js</code></p>
+<iframe src="https://carbon.now.sh/embed?bg=rgba(171%2C%20184%2C%20195%2C%201)&t=monokai&wt=none&l=htmlmixed&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%253C!DOCTYPE%2520html%253E%250A%253Chtml%2520lang%253D%2522en%2522%253E%250A%253Chead%253E%250A%2520%2520%253Cmeta%2520charset%253D%2522UTF-8%2522%253E%250A%2520%2520%253Cmeta%2520name%253D%2522viewport%2522%2520content%253D%2522width%253D%250A%2520%2520%252C%2520initial-scale%253D1.0%2522%253E%250A%2520%2520%253Cmeta%2520http-equiv%253D%2522X-UA-Compatible%2522%2520content%253D%2522ie%253Dedge%2522%253E%250A%2520%2520%253Ctitle%253Ehello%2520webpack%253C%252Ftitle%253E%250A%253C%252Fhead%253E%250A%253Cbody%253E%250A%250A%253C%252Fbody%253E%250A%253Cscript%2520src%253D%2522.%252Fbundle.js%2522%253E%253C%252Fscript%253E%250A%253C%252Fhtml%253E" style="width:100%; height:473px; border:0; overflow:hidden;" sandbox="allow-scripts allow-same-origin"><br></iframe>
+
+<p>随后我们打开浏览器就会看到<code>Hello Webpack!</code>跃然于眼前！</p>
+<p>我们发现每次打包前都需要去繁琐的去执行<code>./node_modules/.bin/webpack</code>，有没有更好的解决方案呢？</p>
+<h3 id="通过npm-script运行webpack"><a href="#通过npm-script运行webpack" class="headerlink" title="通过npm script运行webpack"></a>通过npm script运行webpack</h3><p>Step 1 在package.json文件中增加一条script：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "build": "webpack"</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<p>Step 2 删除我们之前通过<code>./node_modules/.bin/webpack</code>打包出来的dist</p>
+<p><code>rm -rf dist</code>（后续继续介绍不用手动删除的方法）</p>
+<p>Step 3 执行脚本命令</p>
+<p><code>webpack</code></p>
+<p>打包成功！</p>
+<hr>
+<p>如果你觉得这篇文章对你有用</p>
+<p>Buy me a coffee~</p>
+<p><img src="http://q2nr42tde.bkt.clouddn.com/%E6%94%AF%E4%BB%98%E5%AE%9D" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://aspirinlovehyn.top/2020/Webpack初次见面/" data-id="ck57xg3xw00000lzn9qx57qou" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webpack/">Webpack</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/博客代码片段化妆教程-md/" class="article-nav-link">
+        <strong class="article-nav-caption">Older posts</strong>
+        <div class="article-nav-title">博客代码片段化妆教程.md</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'f295049de18d8401e996',
+      clientSecret: '6c99e302ccc4eb0fc6775db22fc7bb3517c7f8aa',
+      repo: 'AspirinMrmi.github.io',
+      owner: 'AspirinMrMi',
+      admin: ['AspirinMrMi'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2018-2020
+        Aspirin
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/love.svg" alt="Aspirin&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/About-me/">About</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  </div>
+</body>
+
+</html>
